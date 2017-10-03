@@ -1,0 +1,14 @@
+{
+  "name": "multistorage",
+  "version": "1.0.0",
+  "description": "Simple wrapper around localStorage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eugene Zadorin <mail@eugenezadorin.ru>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^4.8.0"
+  }
+}
