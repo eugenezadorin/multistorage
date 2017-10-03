@@ -8,7 +8,7 @@ In fact, items still stored in localStorage, but keys are dynamically converted 
 
 All class methods applies only to keys with @StorageName prefix.
 
-But if there is no storage specified for current MultiStorage instance, it works like usual localStorage. For example:
+But if there is no storage name specified for current MultiStorage instance, it works like usual localStorage. For example:
 
     let myStorage = new MultiStorage()
     myStorage.set('some_key', 'some_value') // equals to localStorage.setItem('some_key', 'some_value')
@@ -24,7 +24,7 @@ But if there is no storage specified for current MultiStorage instance, it works
     // or anytime later
     const AnyStorage = new MultiStorage()
     ...
-    AnyStorage.useStorage('Books')
+    AnyStorage.useStorage('Books') // there is no items convertation under the hood, just changing storage name. Previously saved items have not changed.
 
 **Setting values**
 
