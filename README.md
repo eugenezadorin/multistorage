@@ -2,6 +2,18 @@
 
 Simple wrapper around localStorage to create multiple independent storages.
 
+In fact, items still stored in localStorage, but keys are dynamically converted as follows:
+
+    key -> @StorageName:key
+
+All class methods applies only to keys with @StorageName prefix.
+
+But if there is no storage specified for current MultiStorage instance, it works like usual localStorage. For example:
+
+    let myStorage = new MultiStorage()
+    myStorage.set('some_key', 'some_value') // equals to localStorage.setItem('some_key', 'some_value')
+    myStorage.clear() // works as proxy for localStorage.clear()
+
 ## Examples
 
 **Storage initialization**
@@ -9,7 +21,7 @@ Simple wrapper around localStorage to create multiple independent storages.
     // specify storage key in constructor
     const UsersStorage = new MultiStorage('Users')
     
-    // or later
+    // or anytime later
     const AnyStorage = new MultiStorage()
     ...
     AnyStorage.useStorage('Books')
@@ -20,7 +32,7 @@ Simple wrapper around localStorage to create multiple independent storages.
 
 Key should be string. Value should be string or any serializable. Default serializer — `JSON.stringify()`
 
-    UsersStorage.set('user1', {name: 'John', age: 30})
+    UsersStorage.set('user1', {name: 'John', age: 30}) // equals to localStorage.setItem('@Users:user1', JSON.stringify({name: 'John', age: 30}))
     AnyStorage.set('some_key', 'some_value')
 
 **Getting values**
