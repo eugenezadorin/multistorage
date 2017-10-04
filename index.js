@@ -23,7 +23,7 @@ export default class MultiStorage
     set(key, value) {
         window.localStorage.setItem(
             this._prepareKey(key),
-            JSON.stringify(value)
+            this._serialize(value)
         )
     }
 
@@ -32,7 +32,7 @@ export default class MultiStorage
         if (!value && typeof defaultValue != 'undefined') {
             return defaultValue
         }
-        return value
+        return this._unserialize(value)
     }
 
     each(callback) {
@@ -43,10 +43,10 @@ export default class MultiStorage
             key = window.localStorage.key(i)
             if (storageName) {
                 if (key.indexOf(storageName) === 0) {
-                    callback(this._decodeKey(key), window.localStorage.getItem(key), i)
+                    callback(this._decodeKey(key), this._unserialize(window.localStorage.getItem(key)), i)
                 }
             } else {
-                callback(key, window.localStorage.getItem(key), i)
+                callback(key, this._unserialize(window.localStorage.getItem(key)), i)
             }
         }
     }
@@ -61,7 +61,9 @@ export default class MultiStorage
             return
         }
 
-        this.each((key) => this.remove(key))
+        let keys = []
+        this.each((key) => keys.push(key))
+        keys.forEach((key) => this.remove(key))
     }
 
     _prepareKey(k) {
@@ -76,5 +78,19 @@ export default class MultiStorage
             return k.replace(`@${this.storageName}:`, '') 
         }
         return k
+    }
+
+    _serialize(value) {
+        if (this.options.serialize && typeof this.options.serialize == 'function') {
+            return this.options.serialize(value)
+        }
+        return JSON.stringify(value)
+    }
+
+    _unserialize(value) {
+        if (this.options.unserialize && typeof this.options.unserialize == 'function') {
+            return this.options.unserialize(value)
+        }
+        return JSON.parse(value)
     }
 }
