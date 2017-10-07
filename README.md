@@ -14,6 +14,16 @@ But if there is no storage name specified for current MultiStorage instance, it 
     myStorage.set('some_key', 'some_value') // equals to localStorage.setItem('some_key', 'some_value')
     myStorage.clear() // works as proxy for localStorage.clear()
 
+## Installation
+
+    npm install multi-localstorage
+    
+    // Then you can use
+    import MultiStorage from 'multi-localstorage'
+
+    // or include compiled script
+    <script src="node_modules/multi-localstorage/dist/multistorage.min.js"></script>
+
 ## Examples
 
 **Storage initialization**

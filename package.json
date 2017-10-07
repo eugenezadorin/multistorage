@@ -1,7 +1,10 @@
 {
-  "name": "multistorage",
+  "name": "multi-localstorage",
   "version": "1.0.0",
-  "description": "Simple wrapper around localStorage",
+  "description": "Simple wrapper around localStorage to create multiple pseudo-independent storages",
+  "keywords": [
+    "localStorage"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/ava ./test --verbose",
@@ -11,6 +14,10 @@
   },
   "author": "Eugene Zadorin <mail@eugenezadorin.ru>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eugenezadorin/multistorage.git"
+  },
   "babel": {
     "presets": [
       "es2015"
